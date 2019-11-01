@@ -1,4 +1,5 @@
 const Account = require("../models/account");
+const db = require("../models/index")
 const passport = require('passport');
 
 module.exports = {
@@ -57,6 +58,7 @@ module.exports = {
     test: function(req , res, next){
         console.log(`Ping Dinger ${req.statusCode}`);
 		res.status(200).send("Dong!");
-    }
+	},
+	
 
 };
