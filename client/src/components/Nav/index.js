@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import "./style.css";
 // import Login from "../LoginForm";
 
+// Login
+// Search
+// Home
+// Create
+// Play
+// My quizzes
+
 class Nav extends Component {
   state = {
     open: false,
@@ -33,50 +40,56 @@ class Nav extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
-          Auth Plate
-        </Link>
-        <button
-          onClick={this.toggleNav}
-          className="navbar-toggler"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-        <div className={`${this.state.open ? "" : "collapse "}navbar-collapse`} id="navbarNav">
+          Home
+      </Link>
+        <div>
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link
-                onClick={this.toggleNav}
-                className={window.location.pathname === "/" ? "nav-link active" : "nav-link"}
-                to="/login"
-              >
-                Login
-              </Link>
-            </li>
-            {/* <li className="nav-item">
-              <Link
-                onClick={this.toggleNav}
-                className={window.location.pathname === "/" ? "nav-link active" : "nav-link"}
                 to="/"
+                className={
+                  window.location.pathname === "/" || window.location.pathname === "/search"
+                    ? "nav-link active"
+                    : "nav-link"
+                }
               >
                 Search
-              </Link>
-            </li> */}
-            {/* <li className="nav-item">
+            </Link>
+            </li>
+            <li className="nav-item">
               <Link
-                onClick={this.toggleNav}
-                className={window.location.pathname === "/saved" ? "nav-link active" : "nav-link"}
-                to="/saved"
+                to="/create"
+                className={window.location.pathname === "/create" ? "nav-link active" : "nav-link"}
               >
-                Saved
-              </Link>
-            </li> */}
+                Create
+            </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/play"
+                className={window.location.pathname === "/play" ? "nav-link active" : "nav-link"}
+              >
+                Play
+            </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/myquizzes"
+                className={window.location.pathname === "/myquizzes" ? "nav-link active" : "nav-link"}
+              >
+                My Quizzes
+            </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/login"
+                className={window.location.pathname === "/login" ? "nav-link active" : "nav-link"}
+              >
+                Login
+            </Link>
+            </li>
           </ul>
         </div>
       </nav>
