@@ -11,6 +11,7 @@ import Auth from "./utils/Auth";
 import Nav from "./components/Nav";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Main from "./components/Main";
 import { Container } from "./components/Grid";
 import PublicRoute from "./pages/PublicRoute";
 import ProtectedRoute from "./pages/PublicRoute";
@@ -44,9 +45,7 @@ const AuthExample = () => (
 					<PrivateRoute path="/protected" component={ProtectedRoute} />
 					{/* <Route component={NoMatch} /> */}
 				</Switch>
-				{/* <Main>
-Add in a main working space for the project
-				</Main> */}
+				<Main/>
 			</Container>
 		</div>
 	</Router>
