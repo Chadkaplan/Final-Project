@@ -9,7 +9,29 @@ router.route("/take/:id")
     .post(passport.authenticate('local', { failureRedirect: '/login' }), quiz.findQuizById)
 
 router.route("/search/")
-    .get(quiz.searchQuiz)
+    .get(function(req, res){
+        quiz.searchQuiz(req, res)
+    })
+
+router.route("/searchByNewest/")
+    .get(function(req, res){
+        quiz.searchQuizByNewest(req, res)
+    })
+
+router.route("/searchByOldest/")
+    .get(function(req, res){
+        quiz.searchQuizByOldest(req, res)
+    })
+
+router.route("/searchByPopular/")
+    .get(function(req, res){
+        quiz.searchQuizByPopularity(req, res)
+    })
+
+router.route("/create")
+    .get(function(req, res){
+        quiz.addQuiz(req, res)
+    })
 
 
 module.exports = router;
