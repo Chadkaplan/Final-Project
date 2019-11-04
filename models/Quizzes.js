@@ -2,9 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Quizzes = new Schema({
+    //Name of the quiz
+    name: {
+        type: String
+    },
+
     //A list of the questions and their
     contents: {
         type: Array
+    },
+
+    //This is the amount of time the user has to complete the quiz
+    timeLimit: {
+        type: Number
     },
 
     //The type of quiz it is
