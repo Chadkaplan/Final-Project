@@ -10,8 +10,12 @@ import {
 import Auth from "./utils/Auth";
 import Nav from "./components/Nav";
 import Login from "./components/Login";
-import Register from "./components/Register";
-import Main from "./components/Main";
+import Search from "./components/Search";
+// import Create from "./components/Create";
+// import Play from "./components/Play";
+// import MyQuizzes from "./components/MyQuizzes";
+// import Register from "./components/Register";
+// import Main from "./components/Main";
 import { Container } from "./components/Grid";
 import PublicRoute from "./pages/PublicRoute";
 import ProtectedRoute from "./pages/PublicRoute";
@@ -30,44 +34,30 @@ const navStyle = {
 const AuthExample = () => (
 	<Router>
 		<div>
-			<Nav style={navStyle} className="App-header" AuthButton={AuthButton} />
+			<Nav style={navStyle} className="App-header"  />
 			<Container>
-				<AuthButton />
-				<ul style={listStyle}>
+				{/* <ul style={listStyle}>
 					<li><Link to="/public">Public Page</Link></li>
 					<li><Link to="/protected">Protected Page</Link></li>
 					<li><Link to="/register">Register a New User</Link></li>
-				</ul>
+				</ul> */}
 				<Switch>
-					<Route path="/public" component={PublicRoute} />
+					<Route path="/search" component={Search} />
+					{/* <Route path="/create" component={Create} />
+					<Route path="/play" component={Play} />
+					<Route path="/myquizzes" component={MyQuizzes} />
 					<Route path="/login" component={Login} />
-					<Route path="/register" component={Register} />
+					<Route path="/register" component={Register} /> */}
 					<PrivateRoute path="/protected" component={ProtectedRoute} />
 					{/* <Route component={NoMatch} /> */}
 				</Switch>
-				<Main/>
 			</Container>
 		</div>
 	</Router>
 )
 
 
-//Authbutton component / withRouter is imported from react-router
-const AuthButton = withRouter(({ history }) => (
-	Auth.isAuthenticated ? (
-		<div className="container">
-			<p>Success! You are Logged In!</p>
-			<button className="btn btn-danger"
-				onClick={() => {
-					Auth.signout(() => history.push('/'))
-				}}>
-				Sign out
-			</button>
-		</div>
-	) : (
-			<p>You are not logged in.</p>
-		)
-))
+
 
 // This is the private route component this checks for an authorized user here
 const PrivateRoute = ({ component: Component, ...rest }) => (
