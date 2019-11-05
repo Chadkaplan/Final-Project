@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./style.css";
+import Auth from "../../utils/Auth";
+import {
+	Link,
+	withRouter
+} from 'react-router-dom';
 // import Login from "../LoginForm";
 
 // Login
@@ -11,10 +15,13 @@ import "./style.css";
 // My quizzes
 
 class Nav extends Component {
-  state = {
-    open: false,
-    width: window.innerWidth
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      width: window.innerWidth
+    };
+  }
 
   updateWidth = () => {
     const newState = { width: window.innerWidth };
@@ -48,12 +55,9 @@ class Nav extends Component {
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link
-                to="/"
+                to="/search"
                 className={
-                  window.location.pathname === "/" || window.location.pathname === "/search"
-                    ? "nav-link active"
-                    : "nav-link"
-                }
+                  window.location.pathname === "/search" ? "nav-link active" : "nav-link"}
               >
                 Search
             </Link>
@@ -90,11 +94,29 @@ class Nav extends Component {
                 Login
             </Link>
             </li>
+            <AuthButton/>
           </ul>
         </div>
       </nav>
     );
   }
 }
+
+//Authbutton component / withRouter is imported from react-router
+const AuthButton = withRouter(({ history }) => (
+	Auth.isAuthenticated ? (
+		<div >
+			<p className= "inline">Success! You are Logged In!</p>
+			<div className="btn btn-danger"
+				onClick={() => {
+					Auth.signout(() => history.push('/'))
+				}}>
+				Sign out
+			</div>
+		</div>
+	) : (
+			<p>You are not logged in.</p>
+		)
+))
 
 export default Nav;
