@@ -7,6 +7,12 @@ const UserData = new Schema({
         type: String
     },
 
+    //Quizzes they created
+    createdQuizzes: {
+        type: Schema.Types.ObjectId,
+        ref: "Quizzes"
+    },
+
     //A list of every quiz they've taken and how they did
     quizzesPlayed: {
         type: Schema.Types.ObjectId,
@@ -18,3 +24,5 @@ const UserData = new Schema({
         default: Date.now()
     }
 })
+
+module.exports = mongoose.model("UserData", UserData)

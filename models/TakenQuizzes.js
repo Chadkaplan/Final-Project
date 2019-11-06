@@ -17,7 +17,7 @@ const TakenQuizzes = new Schema ({
         type: String,
     },
 
-    correctPerTotal: {
+    correct: {
         type: String
     },
 
