@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import "./style.css";
 import Auth from "../../utils/Auth";
 import {
-	Link,
-	withRouter
+  Link,
+  withRouter
 } from 'react-router-dom';
+import './style.css';
 // import Login from "../LoginForm";
 
 // Login
@@ -22,6 +23,7 @@ class Nav extends Component {
       width: window.innerWidth
     };
   }
+
 
   updateWidth = () => {
     const newState = { width: window.innerWidth };
@@ -48,11 +50,17 @@ class Nav extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link className="navbar-brand" to="/">
-          Home
-      </Link>
         <div>
           <ul className="navbar-nav">
+            <li>
+            <Link
+                to="/"
+                className={
+                  window.location.pathname === "/" ? "nav-link active" : "nav-link"}
+              >
+                Home
+            </Link>
+            </li>
             <li className="nav-item">
               <Link
                 to="/search"
@@ -94,7 +102,7 @@ class Nav extends Component {
                 Login
             </Link>
             </li>
-            <AuthButton/>
+            <AuthButton />
           </ul>
         </div>
       </nav>
@@ -104,19 +112,19 @@ class Nav extends Component {
 
 //Authbutton component / withRouter is imported from react-router
 const AuthButton = withRouter(({ history }) => (
-	Auth.isAuthenticated ? (
-		<div >
-			<p className= "inline">Success! You are Logged In!</p>
-			<div className="btn btn-danger"
-				onClick={() => {
-					Auth.signout(() => history.push('/'))
-				}}>
-				Sign out
+  Auth.isAuthenticated ? (
+    <div >
+      <p className="inline align-right">Success! You are Logged In!</p>
+      <div className="btn btn-danger"
+        onClick={() => {
+          Auth.signout(() => history.push('/'))
+        }}>
+        Sign out
 			</div>
-		</div>
-	) : (
-			<p>You are not logged in.</p>
-		)
+    </div>
+  ) : (
+      <p className="align-right">You are not logged in.</p>
+    )
 ))
 
 export default Nav;

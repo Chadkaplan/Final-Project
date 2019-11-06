@@ -2,6 +2,7 @@ import { Redirect } from 'react-router-dom';
 import Auth from "../../utils/Auth";
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import './style.css'
 
 class Search extends React.Component {
 	constructor(props) {
@@ -9,7 +10,7 @@ class Search extends React.Component {
 		this.state = {
 			dropdownOpen: false,
 			query: "",
-			dropdownChoice: ""
+			selectValue: "Popularity"
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -18,20 +19,22 @@ class Search extends React.Component {
 	handleSubmit(event) {
 		event.preventDefault();
 		const data = new FormData(event.target);
-		fetch(`/api/searchBy${this.state.query}`, {
+		fetch(`/api/searchBy${this.state.selectValue}`, {
 			method: 'POST',
 			body: data,
 		});
 	}
 	handleChange(event) {
 		this.setState({ query: event.target.value });
+		console.log(event.target.value)
 	}
 	handleDropdownChange(event) {
-		// this.setState({dropdownChoice: event.target.value});
 		console.log(event)
+		this.setState({ selectValue: event.target.value });
 	}
 	render() {
 		const toggle = () => { this.setState({ dropdownOpen: !this.state.dropdownOpen }) }
+		var message = 'You selected ' + this.state.selectValue;
 		return (
 			<div>
 				<Form onSubmit={this.handleSubmit} inline>
@@ -43,16 +46,19 @@ class Search extends React.Component {
 						<DropdownToggle caret>
 							Search By:
 					</DropdownToggle>
-						<DropdownMenu>
-							<DropdownItem >Newest</DropdownItem>
-							<DropdownItem >Popularity</DropdownItem>
-							<DropdownItem >Author</DropdownItem>
-							<DropdownItem >Name</DropdownItem>
-							<DropdownItem >ANY OTHER PARAMETERS?</DropdownItem>
+						<DropdownMenu id="dropdown" value={this.state.selectValue} onChange={this.handleDropdownChange}>
+							<DropdownItem value="Popularity">Popularity</DropdownItem>
+							<DropdownItem value="Newest">Newest</DropdownItem>
+							<DropdownItem value="Oldest">Oldest</DropdownItem>
+							<DropdownItem value="Author">Author</DropdownItem>
+							<DropdownItem value="Name">Name</DropdownItem>
 						</DropdownMenu>
 					</Dropdown>
 					<Button>Submit</Button>
 				</Form>
+				<div className="textCheck">
+					{message}
+				</div>
 			</div>
 		)
 	}

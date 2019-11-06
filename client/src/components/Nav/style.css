@@ -4,3 +4,8 @@
 .inline{
   display: inline;
 }
+.align-right{
+  float: right;
+  position: relative;
+  padding-top: 8px;
+}
