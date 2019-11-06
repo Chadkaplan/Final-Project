@@ -29,8 +29,18 @@ router.route("/searchByPopular/")
     })
 
 router.route("/create")
-    .get(function(req, res){
+    .post(function(req, res){
         quiz.addQuiz(req, res)
+    })
+
+router.route("/submit")
+    .post(function(req, res){
+        quiz.takeQuiz(req, res)
+    })
+
+router.route("/user/:user")
+    .get(function(req, res){
+        quiz.userFinder(req, res)
     })
 
 

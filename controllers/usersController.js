@@ -22,7 +22,7 @@ module.exports = {
 				if (err) {
 					return res.status(500).send({ error : err.message });
 				}
-
+				db.UserData.create({username: req.body.username})
 				passport.authenticate('local')(req, res, () => {
 						req.session.save((err) => {
 								if (err) {

@@ -64,20 +64,77 @@ const orm = {
         return search
     },
 
-    takeQuiz: function(req, res){
-        db.TakenQuizzes.create(req.body, function(err){
-            if(err){
-                console.log(err)
-            }
-            db.Quizzes.findByIdAndUpdate(req.body.quizId, {$set: {plays: plays+1}}, function(err, data){
-
+    quizTake: function(req, res){
+        db.TakenQuizzes.create(req.body).then(data=>{
+            db.UserData.findOneAndUpdate({username: req.body.username}, { $push: { quizzesPlayed: dbTakenQuiz._id } }, { new: true }).then(dbUserData=>{
+                db.Quizzes.find({_id: req.body.quizId}).then(dbQuiz=>{
+                    let updateQuery = this.updateQueryMaker(req, dbQuiz)
+                    db.Quizzes.findOneAndUpdate({_id: req.body.quizId}, updateQuery, {new: true})
+                    .populate("TakenQuizzes")
+                    .then(Quiz=>{
+                        res.json(Quiz)
+                    })
+                } )
             })
         })
     },
 
     addQuiz: function(req, res){
-        db.Quizzes.create(req.body).then(data=>res.json(data)).catch(err=>console.log(err))
-    }
+        db.Quizzes.create(req.body)
+        .then(dbQuiz=>{
+            return db.UserData.findOneAndUpdate({username: req.body.username}, { $push: { createdQuizzes: dbQuiz._id } }, { new: true });
+        })
+        .then(dbUser=>{
+            res.json(dbUser)
+        })
+        .catch(err=>console.log(err))
+    },
+
+    updateQueryMaker: function(req, dbTakenQuiz){
+        let newUpdateQuery = new UpdateQuery(req, dbTakenQuiz)
+        newUpdateQuery.$set(req, dbTakenQuiz)
+        return newUpdateQuery
+    },
+
+    UpdateQuery: function(req, dbTakenQuiz){
+        this.$push = {
+            quizTakers: dbTakenQuiz._id
+        }
+
+        this.$set = function(){
+            if(dbTakenQuiz.highScore.correct===req.body.correct && dbTakenQuiz.highScore.time > req.body.time){
+                return(this.$set={
+                    highScore: {
+                        username: req.body.username,
+                        correct: req.body.correct,
+                        time: req.body.time
+                    }
+                })
+            }
+            else if(dbTakenQuiz.highScore.correct > req.body.correct){
+                return(this.$set={
+                    highScore: {
+                        username: req.body.username,
+                        correct: req.body.correct,
+                        time: req.body.time
+                    }
+                })
+            }
+            else{
+                return
+            }
+        }
+    },
+
+    userFinder: function(req, res){
+        let user = req.params.user;
+        db.UserData.findOne({username: user}).populate("Quizzes").then(data=>{
+            res.json(data)
+        })
+    },
+
+    
+
 }
 
 module.exports = orm

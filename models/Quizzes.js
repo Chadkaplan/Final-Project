@@ -7,7 +7,7 @@ const Quizzes = new Schema({
         type: String
     },
 
-    //A list of the questions and their
+    //A list of the questions and their answers
     contents: {
         type: Array
     },
@@ -49,6 +49,15 @@ const Quizzes = new Schema({
     quizCreatedAt: {
         type: Date,
         default: Date.now()
+    },
+
+    highScore: {
+        type: Object,
+        default: {
+            username: undefined,
+            correct: 0,
+            time: 1000000
+        }
     }
 })
 
