@@ -13,8 +13,11 @@
   padding: 20px;
   color: white;
 }
-.body{
-  background: burlywood;
+
+body{
+  background-color:#001f3f;
+  color: red;
+  font-family: Impact, Charcoal, sans-serif;
 }
 
 

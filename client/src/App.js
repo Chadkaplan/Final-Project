@@ -11,11 +11,12 @@ import Auth from "./utils/Auth";
 import Nav from "./components/Nav";
 import Login from "./components/Login";
 import Search from "./components/Search";
+import Create from "./components/Create";
+import Main from "./components/Main";
 // import Create from "./components/Create";
 // import Play from "./components/Play";
 // import MyQuizzes from "./components/MyQuizzes";
-// import Register from "./components/Register";
-// import Main from "./components/Main";
+import Register from "./components/Register";
 import { Container } from "./components/Grid";
 import PublicRoute from "./pages/PublicRoute";
 import ProtectedRoute from "./pages/PublicRoute";
@@ -42,12 +43,13 @@ const AuthExample = () => (
 					<li><Link to="/register">Register a New User</Link></li>
 				</ul> */}
 				<Switch>
-					<Route path="/search" component={Search} />
-					{/* <Route path="/create" component={Create} />
-					<Route path="/play" component={Play} />
-					<Route path="/myquizzes" component={MyQuizzes} />
+					<Route exact path="/search" component={Search} />
+					<Route exact path="/create" component={Create} />
+					<Route exact path="/" component={Main} />
+					{/* <Route path="/play" component={Play} />
+					<Route path="/myquizzes" component={MyQuizzes} /> */}
 					<Route path="/login" component={Login} />
-					<Route path="/register" component={Register} /> */}
+					<Route path="/register" component={Register} />
 					<PrivateRoute path="/protected" component={ProtectedRoute} />
 					{/* <Route component={NoMatch} /> */}
 				</Switch>
