@@ -1,5 +1,5 @@
 import React from 'react';
-import RegisterForm from "../RegisterForm";
+import RegisterForm from "../../components/RegisterForm";
 //The component for doing the actual signup of the User
 class Register extends React.Component {
 	state = {
