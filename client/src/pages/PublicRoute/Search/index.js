@@ -1,5 +1,5 @@
 import { Redirect } from 'react-router-dom';
-import Auth from "../../utils/Auth";
+import Auth from "../../../utils/Auth";
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import './style.css'
