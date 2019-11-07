@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import LoginForm from "../LoginForm";
-import Auth from "../../../utils/Auth";
+import LoginForm from "../../components/LoginForm";
+import Auth from "../../../src/utils/Auth";
 //Uses the Auth methods to actually login with the LoginForm Component.
 class Login extends React.Component {
     //Initial boolean to check for authenticated user
