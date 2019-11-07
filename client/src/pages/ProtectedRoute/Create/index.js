@@ -3,9 +3,28 @@ import {
   Card, CardImg, CardBody, CardTitle, Button
 } from 'reactstrap';
 
-const Create = (props) => {
-	
-  return (
+class Create extends React.Component {
+  state = {
+    contents: [{
+      key: 0,
+      question: "",
+      answers: [{
+        key: 0,
+        answer: "",
+        correct: true
+      },
+      {
+        key: 1,
+        answer: "",
+        correct: false
+      }
+    ]
+    }]
+
+  }
+  
+   render(){ 
+     return (
     <div>
       <Card>
 		{/* WHY IS THE LOGO NOT LOADING INTO THE CARD */}
@@ -17,7 +36,7 @@ const Create = (props) => {
         </CardBody>
       </Card>
     </div>
-  );
+  )}
 };
 
 export default Create;
