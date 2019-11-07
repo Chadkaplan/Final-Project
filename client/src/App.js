@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import Auth from "./utils/Auth";
 import Nav from "./components/Nav";
-import Login from "./components/Login";
+import Login from "../src/pages/Login";
 import Search from "./pages/PublicRoute/Search";
 import Create from "./pages/ProtectedRoute/Create";
 import Main from "./pages/PublicRoute/Main";
