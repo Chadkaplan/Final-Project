@@ -10,7 +10,9 @@ class Search extends React.Component {
 		this.state = {
 			dropdownOpen: false,
 			query: "",
-			selectValue: "Popularity"
+			queryCategory: "",
+			queryAuthor: "",
+			selectValue: "None",
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -19,9 +21,17 @@ class Search extends React.Component {
 	handleSubmit(event) {
 		event.preventDefault();
 		const data = new FormData(event.target);
-		fetch(`/api/searchBy${this.state.selectValue}`, {
-			method: 'POST',
-			body: data,
+		let url = `/api/quiz/search`
+		let sort = this.state.selectValue
+		if (sort === 'None')
+			sort = ''
+		if (sort)
+			url += `By${this.state.selectValue}`
+		url += `?name=${this.state.query}
+				&category=${this.state.queryCategory}
+				&author=${this.state.queryAuthor}`
+		fetch(url, {
+			method: 'GET',
 		});
 	}
 	handleChange(event) {
@@ -29,12 +39,11 @@ class Search extends React.Component {
 		console.log(event.target.value)
 	}
 	handleDropdownChange(event) {
-		console.log(event)
 		this.setState({ selectValue: event.target.value });
+		console.log(this.state.selectValue)
 	}
 	render() {
 		const toggle = () => { this.setState({ dropdownOpen: !this.state.dropdownOpen }) }
-		var message = 'You selected ' + this.state.selectValue;
 		return (
 			<div>
 				<Form onSubmit={this.handleSubmit} inline>
@@ -44,21 +53,22 @@ class Search extends React.Component {
 					</FormGroup>
 					<Dropdown isOpen={this.state.dropdownOpen} toggle={toggle}>
 						<DropdownToggle caret>
-							Search By:
+							Search By: {this.state.selectValue}
 					</DropdownToggle>
-						<DropdownMenu id="dropdown" value={this.state.selectValue} onChange={this.handleDropdownChange}>
-							<DropdownItem value="Popularity">Popularity</DropdownItem>
+						<DropdownMenu id="dropdown" value={this.state.selectValue} onClick={this.handleDropdownChange}>
+							<DropdownItem value="None">None</DropdownItem>
+							<hr></hr>
+							<DropdownItem value="Popular">Popular</DropdownItem>
 							<DropdownItem value="Newest">Newest</DropdownItem>
 							<DropdownItem value="Oldest">Oldest</DropdownItem>
-							<DropdownItem value="Author">Author</DropdownItem>
-							<DropdownItem value="Name">Name</DropdownItem>
+							{/* <DropdownItem value="Author">Author</DropdownItem>
+							<DropdownItem value="Name">Name</DropdownItem> */}
 						</DropdownMenu>
-					</Dropdown>
+						<div >
 					<Button>Submit</Button>
+						</div>
+					</Dropdown>
 				</Form>
-				<div className="textCheck">
-					{message}
-				</div>
 			</div>
 		)
 	}
