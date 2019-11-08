@@ -6,9 +6,28 @@ import React from 'react'
 
 /* This is a very simple component.. it probably doesn't need to be a smart component at this point but you never know what's goingto happen in the future */
 class ProtectedRoute extends React.Component {
+  constructor(props){
+	super(props);
+    this.state = {value: 'coconut'};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
 	render() {
 		return (
-			<h3>This is a Protected Route, You must log in to see this page.</h3>	
+			<div>
+				<p><h3>Question 1:</h3></p>
+				<p><h4>Is Max Awesome?</h4></p>
+				<select value={this.state.value} onChange={this.handleChange}>
+            		<option value="grapefruit">Grapefruit</option>
+            		<option value="lime">Lime</option>
+            		<option value="coconut">Coconut</option>
+            		<option value="mango">Mango</option>
+          </select>
+				<p>Submit!</p>
+			</div>
+			
 		)
 	}
 }
