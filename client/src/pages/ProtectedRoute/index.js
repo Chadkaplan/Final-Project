@@ -20,10 +20,8 @@ class ProtectedRoute extends React.Component {
 				<p><h3>Question 1:</h3></p>
 				<p><h4>Is Max Awesome?</h4></p>
 				<select value={this.state.value} onChange={this.handleChange}>
-            		<option value="grapefruit">Grapefruit</option>
-            		<option value="lime">Lime</option>
-            		<option value="coconut">Coconut</option>
-            		<option value="mango">Mango</option>
+            		<option value="true">Yes</option>
+            		<option value="false">No</option>
           </select>
 				<p>Submit!</p>
 			</div>
