@@ -14,7 +14,7 @@ const Quizzes = new Schema({
 
     //This is the amount of time the user has to complete the quiz
     timeLimit: {
-        type: Number
+        type: String
     },
 
     //The type of quiz it is
@@ -58,6 +58,10 @@ const Quizzes = new Schema({
             correct: 0,
             time: 1000000
         }
+    },
+
+    description: {
+        type: String,
     }
 })
 

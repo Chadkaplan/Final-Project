@@ -22,6 +22,7 @@ class Login extends React.Component {
 		})
 		.then((response) => {
 			if (response.status === 200) { //All good
+				Auth.username=data.username
 				Auth.authenticate(() => { //Update the boolean and take off the cuffs
 					this.setState({ redirectToReferrer: true })
 				});

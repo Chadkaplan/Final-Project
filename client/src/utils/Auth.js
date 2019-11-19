@@ -4,6 +4,7 @@
  */
 
 const Auth = {
+	username: "",
 	isAuthenticated: false,
 	authenticate(cb) {
 		// req.user on backend will contain user info if
