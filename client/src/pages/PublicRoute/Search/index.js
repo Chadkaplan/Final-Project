@@ -9,12 +9,13 @@ class Search extends React.Component {
 		super(props);
 		this.state = {
 			dropdownOpen: false,
-			query: "",
-			queryCategory: "",
-			queryAuthor: "",
+			quizNameQuery: "",
+			// queryCategory: "",
+			quizAuthorQuery: "",
 			selectValue: "None",
 		}
-		this.handleChange = this.handleChange.bind(this);
+		this.handleQuizNameChange = this.handleQuizNameChange.bind(this);
+		this.handleAuthorNameChange = this.handleAuthorNameChange.bind(this);
 		this.handleDropdownChange = this.handleDropdownChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -27,15 +28,19 @@ class Search extends React.Component {
 			sort = ''
 		if (sort)
 			url += `By${this.state.selectValue}`
-		url += `?name=${this.state.query}
-				&category=${this.state.queryCategory}
-				&author=${this.state.queryAuthor}`
+		url += `?name=${this.state.quizNameQuery}
+		&author=${this.state.quizAuthorQuery}`
+		// &category=${this.state.queryCategory}
 		fetch(url, {
 			method: 'GET',
 		});
 	}
-	handleChange(event) {
-		this.setState({ query: event.target.value });
+	handleQuizNameChange(event) {
+		this.setState({ quizNameQuery: event.target.value });
+		console.log(event.target.value)
+	}
+	handleAuthorNameChange(event) {
+		this.setState({ quizAuthorQuery: event.target.value });
 		console.log(event.target.value)
 	}
 	handleDropdownChange(event) {
@@ -49,7 +54,11 @@ class Search extends React.Component {
 				<Form onSubmit={this.handleSubmit} inline>
 					<FormGroup className="mb-2 mr-sm-2 mb-sm-0">
 						<Label for="searchParameter" className="mr-sm-2">Quiz Name:</Label>
-						<Input type="query" name="query" id="searchParameter" placeholder="Quiz Name" value={this.state.query} onChange={this.handleChange} />
+						<Input type="quizNameQuery" name="quizNameQuery" id="searchParameter" placeholder="Quiz Name" value={this.state.quizNameQuery} onChange={this.handleQuizNameChange} />
+					</FormGroup>
+					<FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+						<Label for="searchParameter" className="mr-sm-2">Author Name:</Label>
+						<Input type="quizAuthorQuery" name="quizAuthorQuery" id="searchParameter" placeholder="Author Name" value={this.state.quizAuthorQuery} onChange={this.handleAuthorNameChange} />
 					</FormGroup>
 					<Dropdown isOpen={this.state.dropdownOpen} toggle={toggle}>
 						<DropdownToggle caret>
@@ -61,8 +70,6 @@ class Search extends React.Component {
 							<DropdownItem value="Popular">Popular</DropdownItem>
 							<DropdownItem value="Newest">Newest</DropdownItem>
 							<DropdownItem value="Oldest">Oldest</DropdownItem>
-							{/* <DropdownItem value="Author">Author</DropdownItem>
-							<DropdownItem value="Name">Name</DropdownItem> */}
 						</DropdownMenu>
 						<div >
 					<Button>Submit</Button>
