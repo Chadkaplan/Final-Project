@@ -1,15 +1,8 @@
 import React from "react";
 import {Row, Col} from "reactstrap"
-import mcQuestion from "./mcQuestion";
+import MCQuestion from "./mcQuestion";
 
-function renderSwitch(param) {
-    switch(param) {
-      case 'Multiple Choice':
-        return <mcQuestion />;
-      default:
-        return <mcQuestion />;
-    }
-}
+
 
 function Question (props){
     return(
@@ -17,7 +10,10 @@ function Question (props){
             <Row>
                 Question {props.question.key}:
             </Row>
-            {renderSwitch(props.questionType)}
+            <Row>
+                {props.question.question}
+            </Row>
+            <MCQuestion answers={props.answers} handleMCChange={props.handleMCChange} question={props.question}/>
         </div>
         
     )

@@ -29,9 +29,30 @@ class Create extends React.Component {
     }],
     timeLimit: "",
     category: "",
+  }
 
-
-
+  fakeState = {
+    name: "",
+    author: Auth.username,
+    quizType: "",
+    description: "",
+    contents: [{
+      key: 1,
+      questionType: "Multiple Choice",
+      question: "",
+      answers: [{
+        key: 1,
+        answer: "",
+        correct: true
+      },
+      {
+        key: 2,
+        answer: "",
+        correct: false
+      }]
+    }],
+    timeLimit: "",
+    category: "",
   }
 
   handleNonContentInputChange = event => {
@@ -44,15 +65,15 @@ class Create extends React.Component {
 
   handleQuestionInputChange = event => {
     const value = event.target.value;
-    this.state.contents[event.target.key-1].question=value
-    this.setState({contents: this.state.contents})
+    this.fakeState.contents[event.target.key-1].question=value
+    this.setState({contents: this.fakeState.contents})
 
   };
 
   handleAnswerInputChange = event => {
     const value = event.target.value;
-    this.state.contents[event.target.questionKey-1].answers[event.target.key-1].answer=value
-    this.setState({contents: this.state.contents})
+    this.fakeState.contents[event.target.questionKey-1].answers[event.target.key-1].answer=value
+    this.setState({contents: this.fakeState.contents})
   }
 
   handleFormSubmit = event => {
@@ -70,18 +91,18 @@ class Create extends React.Component {
   addAnswer = event =>{
     event.preventDefault()
     let key = event.target.key
-    let a = this.state.contents[key-1].answers
+    let a = this.fakeState.contents[key-1].answers
     a.push({
       key: a.length+1,
       answer: "",
       correct: false
     })
-    this.setState({contents: this.state.contents})
+    this.setState({contents: this.fakeState.contents})
   }
 
   addQuestion= event => {
     event.preventDefault()
-    let b = this.state.contents
+    let b = this.fakeState.contents
     b.push({
       key: b.length+1,
       questionType: "Multiple Choice",
@@ -97,7 +118,7 @@ class Create extends React.Component {
         correct: false
       }]
     })
-    this.setState({contents: this.state.contents})
+    this.setState({contents: this.fakeState.contents})
   }
 
   render(){ 
@@ -141,7 +162,7 @@ class Create extends React.Component {
             return(
             <CreateMCQuestion 
             key={question.key}
-            contents={this.state.contents[question.key-1]}
+            contents={question}
             question={question.question}
             answers={question.answers}
             addAnswer={this.addAnswer}
