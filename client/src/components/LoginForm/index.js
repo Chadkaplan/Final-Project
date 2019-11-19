@@ -21,9 +21,28 @@ class LoginForm extends React.Component {
 						});
 					}}
 				>
-					<div className="form-group">
-						<input className="form-control" ref={(input) => this.usernameElem = input} type='text' name="username" placeholder='Enter Username' /><br />
-						<input className="form-control" ref={(input) => this.passwordElem = input} type='password' name="password" placeholder='Password' /><br />
+					<div className="wholeContainer" style={{
+					backgroundImage: "linear-gradient(to bottom right, dodgerblue, steelblue, #787878, lightblue, dodgerblue)",
+					opacity: ".95",
+					width: "50% auto",
+					height: "auto",
+					display: "block",
+					textAlign: "center",
+					border: "15px inset royalblue",
+					padding: "10px"
+				}} className="form-group">
+						<input style={{
+						border: "2px solid steelblue",
+						borderRadius: "4px",
+						background: "darkblue",
+						color: "skyblue"
+					}}  className="form-control" ref={(input) => this.usernameElem = input} type='text' name="username" placeholder='Enter Username' /><br />
+						<input style={{
+						border: "2px solid steelblue",
+						borderRadius: "4px",
+						background: "darkblue",
+						color: "skyblue"
+					}}  className="form-control" ref={(input) => this.passwordElem = input} type='password' name="password" placeholder='Password' /><br />
 						<button className="btn btn-success" type='submit'>
 							Submit
 						</button>

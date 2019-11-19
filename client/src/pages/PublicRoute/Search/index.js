@@ -54,14 +54,14 @@ class Search extends React.Component {
 				<Form onSubmit={this.handleSubmit} inline>
 					<FormGroup className="mb-2 mr-sm-2 mb-sm-0">
 						<Label for="searchParameter" className="mr-sm-2">Quiz Name:</Label>
-						<Input type="quizNameQuery" name="quizNameQuery" id="searchParameter" placeholder="Quiz Name" value={this.state.quizNameQuery} onChange={this.handleQuizNameChange} />
+						<Input type="quizNameQuery" name="quizNameQuery" className="searchParameter" placeholder="Quiz Name" value={this.state.quizNameQuery} onChange={this.handleQuizNameChange} />
 					</FormGroup>
 					<FormGroup className="mb-2 mr-sm-2 mb-sm-0">
 						<Label for="searchParameter" className="mr-sm-2">Author Name:</Label>
-						<Input type="quizAuthorQuery" name="quizAuthorQuery" id="searchParameter" placeholder="Author Name" value={this.state.quizAuthorQuery} onChange={this.handleAuthorNameChange} />
+						<Input type="quizAuthorQuery" name="quizAuthorQuery" className="searchParameter" placeholder="Author Name" value={this.state.quizAuthorQuery} onChange={this.handleAuthorNameChange} />
 					</FormGroup>
-					<Dropdown isOpen={this.state.dropdownOpen} toggle={toggle}>
-						<DropdownToggle caret>
+					<Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={toggle}>
+						<DropdownToggle  caret>
 							Search By: {this.state.selectValue}
 					</DropdownToggle>
 						<DropdownMenu id="dropdown" value={this.state.selectValue} onClick={this.handleDropdownChange}>

@@ -1,19 +1,10 @@
 import React, { Component } from "react";
-import "./style.css";
 import Auth from "../../utils/Auth";
 import {
   Link,
   withRouter
 } from 'react-router-dom';
 import './style.css';
-// import Login from "../LoginForm";
-
-// Login
-// Search
-// Home
-// Create
-// Play
-// My quizzes
 
 class Nav extends Component {
   constructor(props) {

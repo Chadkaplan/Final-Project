@@ -4,8 +4,12 @@ import "./style.css";
 
 const Main = (props) => {
   const jumboStyle= {
-    backgroundColor: "#FFFF33",
-    color: "#001f3f"
+    backgroundImage: "linear-gradient(to bottom right, dodgerblue, steelblue, lightblue, dodgerblue)",
+    border: "15px inset royalblue",
+    color: "darkblue",
+    fontFamily: "bookman",
+    opacity: ".95",
+    margin:"30px"
   }
   return (
     <div>

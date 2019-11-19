@@ -45,7 +45,7 @@ class Login extends React.Component {
 		
 		return (
 			<div>
-				<p>You must log in to view the page at {from.pathname}</p>
+				<h4 style={{color: "steelblue", fontSize: "3rem"}}>You must log in to view the page at {from.pathname}</h4>
 				<LoginForm onLogin={this.login} />
 			</div>
 		)

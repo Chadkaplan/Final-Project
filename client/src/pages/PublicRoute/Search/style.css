@@ -1,3 +1,10 @@
 /* body{
     color: red;
 } */
+.searchParameter{
+border: 2px solid steelblue;
+border-radius: 4px;
+background: darkblue;
+color: skyblue;
+}
+
