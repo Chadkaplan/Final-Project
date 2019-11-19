@@ -1,5 +1,6 @@
 import React from 'react';
 import RegisterForm from "../../../components/RegisterForm";
+import Auth from "../../../utils/Auth"
 //The component for doing the actual signup of the User
 class Register extends React.Component {
 	state = {
@@ -17,6 +18,7 @@ class Register extends React.Component {
 		})
 		.then((response) => {
 			if (response.status === 200) {
+				Auth.username=data.username
 				console.log('Succesfully registered user!');
 				//relocate to the login page
 				window.location.assign("/protected");

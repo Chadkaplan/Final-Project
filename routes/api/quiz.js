@@ -6,7 +6,9 @@ const quiz = require("../../controllers/quizController");
 
 //Route to take a quiz
 router.route("/take/:id")
-    .post(passport.authenticate('local', { failureRedirect: '/login' }), quiz.findQuizById)
+    .get(function(req, res){
+        quiz.findQuizById(req, res)
+    })
 
 router.route("/search/")
     .get(function(req, res){

@@ -13,6 +13,7 @@ import Login from "../src/pages/Login";
 import Search from "./pages/PublicRoute/Search";
 import Create from "./pages/ProtectedRoute/Create";
 import Main from "./pages/PublicRoute/Main";
+import QuizTake from "./pages/ProtectedRoute/QuizTake";
 // import Create from "./components/Create";
 // import Play from "./components/Play";
 // import MyQuizzes from "./components/MyQuizzes";
@@ -51,6 +52,7 @@ const AuthExample = () => (
 					<Route path="/login" component={Login} />
 					<Route path="/register" component={Register} />
 					<PrivateRoute path="/protected" component={ProtectedRoute} />
+					<PrivateRoute path="/take/:id" component={QuizTake} />
 					{/* <Route component={NoMatch} /> */}
 				</Switch>
 			</Container>

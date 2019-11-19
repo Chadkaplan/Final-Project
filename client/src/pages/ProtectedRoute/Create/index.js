@@ -1,13 +1,20 @@
 import React from 'react';
 import {
-  Card, CardImg, CardBody, CardTitle, Button
+  Card, CardImg, CardBody, CardTitle, Button, Row, Col
 } from 'reactstrap';
-import CreateQuestion from "../../../components/CreateQuestion"
+import CreateMCQuestion from "../../../components/CreateMCQuestion";
+import Auth from "../../../utils/Auth";
+import QuizLogo from "../../../assets/quizLogo.jpg"
 
 class Create extends React.Component {
   state = {
+    name: "",
+    author: Auth.username,
+    quizType: "",
+    description: "",
     contents: [{
       key: 1,
+      questionType: "Multiple Choice",
       question: "",
       answers: [{
         key: 1,
@@ -19,27 +26,65 @@ class Create extends React.Component {
         answer: "",
         correct: false
       }]
-    }]
+    }],
+    timeLimit: "",
+    category: "",
+
+
 
   }
 
-  handleInputChange = event => {
+  handleNonContentInputChange = event => {
     const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleQuestionInputChange = event => {
+    const value = event.target.value;
+    this.state.contents[event.target.key-1].question=value
+    this.setState({contents: this.state.contents})
+
   };
+
+  handleAnswerInputChange = event => {
+    const value = event.target.value;
+    this.state.contents[event.target.questionKey-1].answers[event.target.key-1].answer=value
+    this.setState({contents: this.state.contents})
+  }
+
+  handleFormSubmit = event => {
+    event.preventDefault()
+    return(this.submit())
+  }
+
+  submit(){
+    fetch("/api/quiz/submit", {
+      method: "POST",
+      body: this.state
+    })
+  }
   
-  addAnswer(key){
-    let a = this.state.contents.question[key-1].answers
+  addAnswer = event =>{
+    event.preventDefault()
+    let key = event.target.key
+    let a = this.state.contents[key-1].answers
     a.push({
       key: a.length+1,
       answer: "",
       correct: false
     })
+    this.setState({contents: this.state.contents})
   }
 
-  addQuestion(){
+  addQuestion= event => {
+    event.preventDefault()
     let b = this.state.contents
     b.push({
       key: b.length+1,
+      questionType: "Multiple Choice",
       question: "",
       answers: [{
         key: 1,
@@ -52,6 +97,7 @@ class Create extends React.Component {
         correct: false
       }]
     })
+    this.setState({contents: this.state.contents})
   }
 
   render(){ 
@@ -61,18 +107,49 @@ class Create extends React.Component {
 		{/* WHY IS THE LOGO NOT LOADING INTO THE CARD */}
         <CardBody>
           <CardTitle className="text-center"><h1><strong>Create A Quiz</strong></h1></CardTitle>
-        <CardImg top width="100%" src="../../assets/quizLogo.jpg" alt="Quiz Logo image" />
+        <CardImg top width="100%" src={QuizLogo} alt="Quiz Logo image" />
 		<br/>
-          <Button>Create A Quiz!</Button>
+          <Row>Create A Quiz!</Row>
+          <Row>
+            <Col>
+              <Row>
+                Quiz Name:
+              </Row>
+              <Row>
+                <input
+                  onChange={this.handleNonContentInputChange}
+                  value={this.state.name}
+                  name="name"
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter the name of your quiz here"
+                  id="quizName"
+                />
+              </Row>
+            </Col>
+            <Col>
+              {/*Category dropdown */}
+            </Col>
+            <Col>
+              {/*Time Limit dropdown */}
+            </Col>
+            <Col>
+              {/*Quiz type dropdown */}
+            </Col>
+          </Row>
           {this.state.contents.map(question=>{
             return(
-            <CreateQuestion 
+            <CreateMCQuestion 
             key={question.key}
             contents={this.state.contents[question.key-1]}
+            question={question.question}
             answers={question.answers}
             addAnswer={this.addAnswer}
+            handleQuestionInputChange={this.handleQuestionInputChange}
+            handleAnswerInputChange = {this.handleAnswerInputChange}
             />
           )})}
+          <Button onClick={this.handleFormSubmit}>Submit</Button>
         </CardBody>
       </Card>
     </div>
