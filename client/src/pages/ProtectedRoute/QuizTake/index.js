@@ -1,5 +1,6 @@
 import React from 'react';
 import {Row, Col, Button} from "reactstrap";
+import Question from "../../../components/Question"
 
 
 class QuizTake extends React.Component{
