@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "category": "Coding"
+    },
+    {
+        "id": 2,
+        "category": "Physics"
+    },
+    {
+        "id": 3,
+        "category": "Chemistry"
+    },
+    {
+        "id": 4,
+        "category": "Biology"
+    },
+    {
+        "id": 5,
+        "category": "Geography"
+    },
+    {
+        "id": 6,
+        "category": "Film and TV"
+    },
+    {
+        "id": 7,
+        "category": "Music"
+    },
+    {
+        "id": 8,
+        "category": "Sports"
+    },
+    {
+        "id": 9,
+        "category": "Food and Drink"
+    }
+]

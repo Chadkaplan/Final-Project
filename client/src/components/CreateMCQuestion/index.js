@@ -1,12 +1,12 @@
 import React from "react";
 import Answer from "./Answer";
-import {Row, Col} from "reactstrap"
+import {Row, Col, Button} from "reactstrap"
 
 function CreateQuestion (props){
     return(
         <div>
             <Row>
-                <h3>Question {props.key}:</h3>
+                <h3>Question {props.questionKey}:</h3>
             </Row>
             <Row>
                 <input
@@ -16,20 +16,31 @@ function CreateQuestion (props){
                     type="text"
                     placeholder="Write Your Question here"
                     onChange={props.handleQuestionInputChange.bind(this)}
+                    name={props.questionKey}
                     required
                 />
             </Row>
+            <Row></Row>
             {props.answers.map(answer=>{
                 return(
-                <Answer 
-                    key={answer.key}
-                    questionKey={props.key}
-                    value={props.contents.answers.answer}
-                    onChange={props.handleAnswerInputChange.bind(this)}
-                />
+                <Row>
+                    <Col>
+                        <Row>
+                        <Answer 
+                            key={answer.key}
+                            name={answer.key}
+                            questionKey={props.questionKey}
+                            correct={answer.correct}
+                            value={props.contents.answers.answer}
+                            onChange={props.handleAnswerInputChange.bind(this)}
+                        />
+                        </Row>
+                        <Row></Row>
+                    </Col>
+                </Row>
                 )
             })}
-            <button onClick={props.addAnswer} key={props.key}>Add an incorrect answer</button>
+            <Row><Button onClick={props.addAnswer.bind(this)} name={props.questionKey}>Add an incorrect answer</Button></Row>
         </div>
     )
 }
