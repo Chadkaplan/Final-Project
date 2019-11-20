@@ -64,8 +64,25 @@ class Create extends React.Component {
     const value = event.target.value;
     const name = event.target.name;
     this.setState({
-      [name]: value
+      name: value
     });
+    console.log()
+  }
+  handleCategoryInputChange = event => {
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      name: value
+    });
+    console.log()
+  }
+  handleTimeInputChange = event => {
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      name: value
+    });
+    console.log()
   }
 
   handleQuestionInputChange = event => {
@@ -84,6 +101,32 @@ class Create extends React.Component {
 
   handleFormSubmit = event => {
     event.preventDefault()
+    this.setState(
+    {    name: "",
+    author: "",
+    quizType: "Multiple Choice",
+    description: "",
+    contents: [{
+      key: 1,
+      questionType: "Multiple Choice",
+      question: "",
+      answers: [{
+        key: 1,
+        answer: "",
+        correct: true
+      },
+      {
+        key: 2,
+        answer: "",
+        correct: false
+      }]
+    }],
+    timeLimit: "",
+    category: "",
+    catDropdownOpen: false,
+    timeDropdownOpen: false,
+    timeOptions: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]})
+    alert("Your quiz has been submitted")
     return(this.submit())
   }
 
@@ -145,7 +188,6 @@ class Create extends React.Component {
      return (
     <div>
       <Card>
-		{/* WHY IS THE LOGO NOT LOADING INTO THE CARD */}
         <CardBody>
           <CardTitle className="text-center"><h1><strong>Create A Quiz</strong></h1></CardTitle>
         <CardImg top width="100%" src={QuizLogo} alt="Quiz Logo image" />
@@ -178,8 +220,8 @@ class Create extends React.Component {
 						      <DropdownToggle  caret>
 							      Category: {this.state.category}
 					        </DropdownToggle>
-						      <DropdownMenu id="dropdown" value={this.state.category} name="category" onClick={this.handleNonContentInputChange.bind(this)}>
-							      {Category.map(category=>{
+						      <DropdownMenu id="dropdown" value={this.state.category} name="category" onClick={this.handleCategoryInputChange.bind(this)}>
+							      {Category.forEach(category=>{
                       return(
                         <DropdownItem value={category.category} key={category.id}>{category.category}</DropdownItem>
                       )
@@ -198,7 +240,7 @@ class Create extends React.Component {
 						      <DropdownToggle  caret>
 							      Time Limit: {this.state.category}
 					        </DropdownToggle>
-						      <DropdownMenu id="dropdown" value={this.state.category} name="timeLimit" onClick={this.handleNonContentInputChange.bind(this)}>
+						      <DropdownMenu id="dropdown" value={this.state.category} name="timeLimit" onClick={this.handleTimeInputChange.bind(this)}>
 							      {this.state.timeOptions.map(multiplier=>{
                       let min = Math.floor(multiplier/2)
                       let sec = multiplier%2===0?"00":"30"
