@@ -2,7 +2,11 @@ import { Redirect } from 'react-router-dom';
 import Auth from "../../../utils/Auth";
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import './style.css'
+import './style.css';
+import {
+	Link,
+	withRouter
+  } from 'react-router-dom';
 
 class Search extends React.Component {
 	constructor(props) {
@@ -13,6 +17,9 @@ class Search extends React.Component {
 			// queryCategory: "",
 			quizAuthorQuery: "",
 			selectValue: "None",
+			geo: false,
+			code: false,
+			brba: false
 		}
 		this.handleQuizNameChange = this.handleQuizNameChange.bind(this);
 		this.handleAuthorNameChange = this.handleAuthorNameChange.bind(this);
@@ -21,19 +28,28 @@ class Search extends React.Component {
 	}
 	handleSubmit(event) {
 		event.preventDefault();
-		const data = new FormData(event.target);
-		let url = `/api/quiz/search`
-		let sort = this.state.selectValue
-		if (sort === 'None')
-			sort = ''
-		if (sort)
-			url += `By${this.state.selectValue}`
-		url += `?name=${this.state.quizNameQuery}
-		&author=${this.state.quizAuthorQuery}`
+		//const data = new FormData(event.target);
+		//let url = `/api/quiz/search`
+		//let sort = this.state.selectValue
+		//if (sort === 'None')
+			//sort = ''
+		//if (sort)
+			//url += `By${this.state.selectValue}`
+		//url += `?name=${this.state.quizNameQuery}
+		//&author=${this.state.quizAuthorQuery}`
 		// &category=${this.state.queryCategory}
-		fetch(url, {
-			method: 'GET',
-		});
+		//fetch(url, {
+			//method: 'GET',
+		//});
+		if(this.state.quizNameQuery==="Geography"){
+			this.setState({geo: true})
+		}
+		else if(this.state.quizNameQuery==="Javascript"){
+			this.setState({code: true})
+		}
+		else{
+			this.setState({brba: true})
+		}
 	}
 	handleQuizNameChange(event) {
 		this.setState({ quizNameQuery: event.target.value });
@@ -76,6 +92,28 @@ class Search extends React.Component {
 						</div>
 					</Dropdown>
 				</Form>
+				<br/>
+				{this.state.geo?(
+					<Link to="/take/1234567">
+						<h2>Geography Quiz</h2>
+					</Link>
+				):(
+					<div></div>
+				)}
+				{this.state.code?(
+					<Link to="/take/5dd56638d8169320fc4b9c29">
+						<h2>Javascript</h2>
+					</Link>
+				):(
+					<div></div>
+				)}
+				{this.state.brba?(
+					<Link to="/take/5dd56f3d06885b71966e410f">
+						<h2>Breaking Bad knowledge test</h2>
+					</Link>
+				):(
+					<div></div>
+				)}
 			</div>
 		)
 	}
