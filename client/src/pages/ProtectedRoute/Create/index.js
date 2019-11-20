@@ -138,7 +138,7 @@ class Create extends React.Component {
               </Row>
               <Row>
                 <input
-                  onChange={this.handleNonContentInputChange}
+                  onChange={this.handleNonContentInputChange.bind(this)}
                   value={this.state.name}
                   name="name"
                   type="text"
@@ -165,11 +165,14 @@ class Create extends React.Component {
             contents={question}
             question={question.question}
             answers={question.answers}
-            addAnswer={this.addAnswer}
-            handleQuestionInputChange={this.handleQuestionInputChange}
-            handleAnswerInputChange = {this.handleAnswerInputChange}
+            addAnswer={this.addAnswer.bind(this)}
+            handleQuestionInputChange={this.handleQuestionInputChange.bind(this)}
+            handleAnswerInputChange = {this.handleAnswerInputChange.bind(this)}
             />
           )})}
+          <Row>
+            <Button onClick={this.addQuestion}>Add another Question</Button>
+          </Row>
           <Button onClick={this.handleFormSubmit}>Submit</Button>
         </CardBody>
       </Card>

@@ -10,7 +10,7 @@ function Answer (props){
                 value={props.value}
                 placeholder={props.key===1?"Write the correct answer here":"Write an incorrect option here"}
                 name={props.name}
-                onChange={props.handleInputChange(props.key)}
+                onChange={props.handleInputChange}
                 correct={props.key===1?true:false}
                 required
             />
