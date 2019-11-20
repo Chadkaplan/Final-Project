@@ -15,7 +15,7 @@ function CreateQuestion (props){
                     value={props.contents.question}
                     type="text"
                     placeholder="Write Your Question here"
-                    onChange={props.handleQuestionInputChange(props.key)}
+                    onChange={props.handleQuestionInputChange.bind(this)}
                     required
                 />
             </Row>
@@ -25,11 +25,11 @@ function CreateQuestion (props){
                     key={answer.key}
                     questionKey={props.key}
                     value={props.contents.answers.answer}
-                    onChange={props.handleAnswerInputChange}
+                    onChange={props.handleAnswerInputChange.bind(this)}
                 />
                 )
             })}
-            <button onClick={props.addAnswer(props.key)}>Add an incorrect answer</button>
+            <button onClick={props.addAnswer} key={props.key}>Add an incorrect answer</button>
         </div>
     )
 }
