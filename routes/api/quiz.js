@@ -32,6 +32,7 @@ router.route("/searchByPopular/")
 
 router.route("/create")
     .post(function(req, res){
+        console.log(req.body)
         quiz.addQuiz(req, res)
     })
 
