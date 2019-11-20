@@ -1,5 +1,5 @@
-import React from 'react';
-import {Row, Col, Button} from "reactstrap";
+import React, { useState } from 'react';
+import {Row, Col, Button, Card, CardBody, Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
 import Question from "../../../components/Question";
 import shuffle from "../../../utils/shuffle"
 
@@ -26,29 +26,128 @@ class QuizTake extends React.Component{
     }
 
     componentDidMount(){
-        let {id} = URLSearchParams()
-        fetch("/api/quiz/take/"+id, {
-            method: "GET"
-        }).then(response=>{
-            let time = this.timeBuilder(response)
-            response.contents.map(question=>{
-                shuffle(question.answers)
-                return question
-            })
-            this.setState({
-                contents: response.contents,
-                author: response.author,
-                quizType: response.quizType,
-                quizName: response.quizName,
-                quizID: response._id,
-                timeLimit: response.timeLimit,
-                category: response.category,
-                highScore: response.highScore,
-                description: response.description,
-                timeRemaining: time,
-                intervalId: ""
-            })
-        }).catch(err=>{console.log(err)})
+        console.log(this.props.match.params)
+        let id = this.props.match.params
+        switch(id.id){
+            case "5dd56f3d06885b71966e410f":
+                    this.setState({
+                        contents: [{
+                            key: 1,
+                            question: 'Which character famously said the line: "say my name"?',
+                            answers: [
+                                {
+                                    key: 1,
+                                    answer: "Walter White",
+                                    correct: true
+                                },
+                                {
+                                    key: 2,
+                                    answer: "Gus Fring",
+                                    correct: false
+                                },
+                                {
+                                    key: 3,
+                                    answer: "Skyler White",
+                                    correct: false
+                                },
+                                {
+                                    key: 4,
+                                    answer: "Hank",
+                                    correct: false
+                                }
+                            ]
+                        },
+                        {
+                            key: 2,
+                            question: 'Which character is in a wheelchair and dings a bell to communicate?',
+                            answers: [
+                                {
+                                    key: 1,
+                                    answer: "Hector Salamanca",
+                                    correct: true
+                                },
+                                {
+                                    key: 2,
+                                    answer: "Gus Fring",
+                                    correct: false
+                                },
+                                {
+                                    key: 3,
+                                    answer: "Flynn White",
+                                    correct: false
+                                },
+                                {
+                                    key: 4,
+                                    answer: "Gale",
+                                    correct: false
+                                }
+                            ]
+                        },
+                        {
+                            key: 3,
+                            question: 'Which character famously said the line: "say my name"?',
+                            answers: [
+                                {
+                                    key: 1,
+                                    answer: "Walter White",
+                                    correct: true
+                                },
+                                {
+                                    key: 2,
+                                    answer: "Gus Fring",
+                                    correct: false
+                                },
+                                {
+                                    key: 3,
+                                    answer: "Skyler White",
+                                    correct: false
+                                },
+                                {
+                                    key: 4,
+                                    answer: "Hank",
+                                    correct: false
+                                }
+                            ]
+                        },
+                        {
+                            key: 4,
+                            question: `Who is Walt's original partner in cooking?`,
+                            answers: [
+                                {
+                                    key: 1,
+                                    answer: "Jesse",
+                                    correct: true
+                                },
+                                {
+                                    key: 2,
+                                    answer: "Mike",
+                                    correct: false
+                                },
+                                {
+                                    key: 3,
+                                    answer: "Hector Salamanca",
+                                    correct: false
+                                },
+                                {
+                                    key: 4,
+                                    answer: "Hank",
+                                    correct: false
+                                }
+                            ]
+                        },
+                        ],
+                        author: "waltW",
+                        quizType: "Multiple Choice",
+                        quizName: "Breaking Bad knowledge test",
+                        quizID: "5dd56f3d06885b71966e410f",
+                        timeLimit: "2m 00s",
+                        category: "Film and TV",
+                        description: "Test your knowledge of breaking bad",
+                        timeRemaining: 180
+                    })
+            break;
+        }
+            
     }
 
     handleMCChange = event => {
@@ -85,6 +184,7 @@ class QuizTake extends React.Component{
 
     startQuiz = event => {
         event.preventDefault()
+        console.log(this.state.contents)
         var intervalId = setInterval(()=>{
             this.setState({timeRemaining: this.state.timeRemaining-1})
         }, 1000)
@@ -92,34 +192,26 @@ class QuizTake extends React.Component{
             quizStarted: true,
             intervalId: intervalId
         })
+        console.log(this.state.quizStarted)
     }
 
     submit = event => {
         event.preventDefault()
         clearInterval(this.state.intervalId)
-        let timeTaken = this.timeBuilder(this.state) - this.state.timeRemaining;
         let correct = 0
         this.state.quizAnswers.forEach(answer=>{
             if(answer.correct===true){
                 correct++
             }
         })
-        fetch("/api/quiz/submit", {
-            method: "POST",
-            body: {
-                username: this.state.username,
-                category: this.state.category,
-                quizID: this.state.quizID,
-                correct: correct,
-                time: timeTaken,
-            }
-        })
+        console.log(correct)
     }
     
 
     render(){
         return(
-            <div>
+            <Card>
+                <CardBody>
                 <Row>
                     <Col xs="6">
                         <Row>
@@ -162,7 +254,11 @@ class QuizTake extends React.Component{
                         {this.state.contents.map(question => {
                             return(
                                 <Question
-                                    question={question}
+                                    key={question.key}
+                                    question={question.question}
+                                    questionKey={question.key}
+                                    answers={question.answers}
+                                    handleMCChange={this.handleMCChange}
                                 />
                             )
                         })}
@@ -176,9 +272,38 @@ class QuizTake extends React.Component{
                     )}
                     
                 </Row>
-            </div>
+                </CardBody>
+            </Card>
         )
     }
 }
+
+const SubmitModal = (props) => {
+    const {
+      buttonLabel,
+      className
+    } = props;
+  
+    const [modal, setModal] = useState(false);
+  
+    const toggle = () => setModal(!modal);
+  
+    return (
+      <div>
+        <Button color="danger" onClick={toggle}>{buttonLabel}</Button>
+        <Modal isOpen={modal} toggle={toggle} className={className}>
+          <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+          <ModalBody>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
+            <Button color="secondary" onClick={toggle}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
+      </div>
+    );
+}
+
 
 export default QuizTake

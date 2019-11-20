@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardImg, CardBody, CardTitle, Button, Row, Col
+  Form, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardImg, CardBody, CardTitle, Button, Row, Col
 } from 'reactstrap';
 import CreateMCQuestion from "../../../components/CreateMCQuestion";
 import QuizLogo from "../../../assets/quizLogo.jpg";
@@ -130,19 +130,23 @@ class Create extends React.Component {
     return(this.submit())
   }
 
-  submit(){
+  submit(data){
+    let y = JSON.stringify({
+      contents: data.contents,
+      timeLimit: data.timeLimit,
+      author: data.author,
+      description: data.description,
+      category: data.category,
+      quizType: data.quizType,
+      name: data.name,
+
+    })
+    console.log(y)
     fetch("/api/quiz/create", {
       method: "POST",
-      body: {
-        contents: this.state.contents,
-        timeLimit: this.state.timeLimit,
-        author: this.state.author,
-        description: this.state.description,
-        category: this.state.category,
-        quizType: this.state.quizType,
-        name: this.state.name,
-
-      }
+      body: y
+    }).then(response=>{
+      console.log(response)
     })
   }
   
@@ -193,6 +197,7 @@ class Create extends React.Component {
         <CardImg top width="100%" src={QuizLogo} alt="Quiz Logo image" />
 		      <br/>
           <Row></Row>
+          <Form onSubmit={this.handleFormSubmit.bind(this)}>
           <Row>
             <Col>
               <Row>
@@ -253,7 +258,7 @@ class Create extends React.Component {
               </Row>
             </Col>
           </Row>
-          <br></br>
+          <br/>
           {this.state.contents.map(question=>{
             return(
             <CreateMCQuestion 
@@ -267,13 +272,28 @@ class Create extends React.Component {
             handleAnswerInputChange = {this.handleAnswerInputChange}
             />
           )})}
+          <br/>
           <Row>
             <Button onClick={this.addQuestion}>Add another Question</Button>
           </Row>
+          <br/>
+          <Row>
+            Description:
+            <input
+              onChange={this.handleNonContentInputChange.bind(this)}
+              value={this.state.description}
+              name="description"
+              type="text"
+              className="form-control"
+              id="description"
+              placeholder="Enter description here"
+            />
+          </Row>
+          <br/>
           <Row>
             <Button onClick={this.handleFormSubmit}>Submit</Button>
           </Row>
-
+          </Form>
         </CardBody>
       </Card>
     </div>

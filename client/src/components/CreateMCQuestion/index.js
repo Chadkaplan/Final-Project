@@ -20,7 +20,7 @@ function CreateQuestion (props){
                     required
                 />
             </Row>
-            <Row></Row>
+            <br/>
             {props.answers.map(answer=>{
                 return(
                 <Row>
@@ -35,7 +35,9 @@ function CreateQuestion (props){
                             onChange={props.handleAnswerInputChange.bind(this)}
                         />
                         </Row>
-                        <Row></Row>
+                        <Row>
+                            <br/>
+                        </Row>
                     </Col>
                 </Row>
                 )

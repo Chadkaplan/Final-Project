@@ -8,7 +8,7 @@ function Question (props){
     return(
         <div>
             <Row>
-                Question {props.question.key}:
+                Question {props.questionKey}:
             </Row>
             <Row>
                 {props.question.question}
