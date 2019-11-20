@@ -1,5 +1,5 @@
 import React from "react";
-import {Row} from "reactstrap";
+import {Row, Form} from "reactstrap";
 
 
 function mcQuestion (props){
@@ -8,13 +8,15 @@ function mcQuestion (props){
             <Row>
                 {props.question}
             </Row>
-            <Row onChange={props.handleMCChange.bind(this)}>
+            <Form>
                 {props.answers.map(answer => {
                     return(
-                        <input type="radio" value={answer.correct} key={answer.key} name={props.question}>{answer.answer}</input>
+                        <Row>
+                            <input type="radio" value={answer.correct} key={answer.key} name={props.question} onChange={props.handleMCChange}>{answer.answer}</input>
+                        </Row>
                     )
                 })}
-            </Row>
+            </Form>
         </div>
     )
 }
