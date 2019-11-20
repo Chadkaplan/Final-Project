@@ -85,26 +85,26 @@ class QuizTake extends React.Component{
                         },
                         {
                             key: 3,
-                            question: 'Which character famously said the line: "say my name"?',
+                            question: 'Which character is a DEA agent?',
                             answers: [
                                 {
                                     key: 1,
-                                    answer: "Walter White",
+                                    answer: "Hank",
                                     correct: true
                                 },
                                 {
                                     key: 2,
-                                    answer: "Gus Fring",
+                                    answer: "Gus",
                                     correct: false
                                 },
                                 {
                                     key: 3,
-                                    answer: "Skyler White",
+                                    answer: "Walt",
                                     correct: false
                                 },
                                 {
                                     key: 4,
-                                    answer: "Hank",
+                                    answer: "Tuco",
                                     correct: false
                                 }
                             ]
@@ -136,16 +136,210 @@ class QuizTake extends React.Component{
                             ]
                         },
                         ],
-                        author: "waltW",
+                        author: "maxBloom",
                         quizType: "Multiple Choice",
                         quizName: "Breaking Bad knowledge test",
                         quizID: "5dd56f3d06885b71966e410f",
-                        timeLimit: "2m 00s",
+                        timeLimit: "3m 00s",
                         category: "Film and TV",
                         description: "Test your knowledge of breaking bad",
                         timeRemaining: 180
                     })
             break;
+            case "5dd56638d8169320fc4b9c29":
+                    this.setState({
+                        contents: [{
+                            key: 1,
+                            question: 'What allows javascript to run asynchronously outside the browser?',
+                            answers: [
+                                {
+                                    key: 1,
+                                    answer: "Node",
+                                    correct: true
+                                },
+                                {
+                                    key: 2,
+                                    answer: "React",
+                                    correct: false
+                                },
+                                {
+                                    key: 3,
+                                    answer: "Express",
+                                    correct: false
+                                },
+                                {
+                                    key: 4,
+                                    answer: "MongoDB",
+                                    correct: false
+                                }
+                            ]
+                        },
+                        {
+                            key: 2,
+                            question: 'JavaScript is a(n) ________ oriented language.',
+                            answers: [
+                                {
+                                    key: 2,
+                                    answer: "Object",
+                                    correct: false
+                                },
+                                {
+                                    key: 1,
+                                    answer: "Event",
+                                    correct: true
+                                },
+                                {
+                                    key: 3,
+                                    answer: "Visual",
+                                    correct: false
+                                },
+                                {
+                                    key: 4,
+                                    answer: "Math",
+                                    correct: false
+                                }
+                            ]
+                        },
+                        {
+                            key: 3,
+                            question: 'Sequelize npm package is a type of what?',
+                            answers: [
+                                {
+                                    key: 1,
+                                    answer: "MVC",
+                                    correct: false
+                                },
+                                {
+                                    key: 2,
+                                    answer: "div",
+                                    correct: false
+                                },
+                                {
+                                    key: 3,
+                                    answer: "ORM",
+                                    correct: true
+                                },
+                                {
+                                    key: 4,
+                                    answer: "Html tag",
+                                    correct: false
+                                }
+                            ]
+                        },
+                        {
+                            key: 4,
+                            question: `Which of these is a frontend framework?`,
+                            answers: [
+                                {
+                                    key: 1,
+                                    answer: "React",
+                                    correct: true
+                                },
+                                {
+                                    key: 2,
+                                    answer: "Node",
+                                    correct: false
+                                },
+                                {
+                                    key: 3,
+                                    answer: "Express",
+                                    correct: false
+                                },
+                                {
+                                    key: 4,
+                                    answer: "MongoDB",
+                                    correct: false
+                                }
+                            ]
+                        },
+                        ],
+                        author: "maxBloom",
+                        quizType: "Multiple Choice",
+                        quizName: "Javascript",
+                        quizID: "5dd56f3d06885b71966e410f",
+                        timeLimit: "2m 00s",
+                        category: "Coding",
+                        description: "Test your knowledge of Javascript",
+                        timeRemaining: 120
+                    })
+            break
+            case "1234567":
+                    this.setState({
+                        contents: [{
+                            key: 1,
+                            question: 'What is the largest state in the US?',
+                            answers: [
+                                {
+                                    key: 1,
+                                    answer: "Alaska",
+                                    correct: true
+                                },
+                                {
+                                    key: 2,
+                                    answer: "Texas",
+                                    correct: false
+                                },
+                                {
+                                    key: 3,
+                                    answer: "Florida",
+                                    correct: false
+                                }
+                            ]
+                        },
+                        {
+                            key: 2,
+                            question: 'What is the largest country on earth',
+                            answers: [
+                                {
+                                    key: 2,
+                                    answer: "USA",
+                                    correct: false
+                                },
+                                {
+                                    key: 1,
+                                    answer: "Russia",
+                                    correct: true
+                                },
+                                {
+                                    key: 3,
+                                    answer: "China",
+                                    correct: false
+                                }
+                            ]
+                        },
+                        {
+                            key: 3,
+                            question: 'What is the smallest state in the US?',
+                            answers: [
+                                {
+                                    key: 1,
+                                    answer: "Illinois",
+                                    correct: false
+                                },
+                                {
+                                    key: 2,
+                                    answer: "Connecticut",
+                                    correct: false
+                                },
+                                {
+                                    key: 3,
+                                    answer: "Rhode Island",
+                                    correct: true
+                                }
+                            ]
+                        }
+                        ],
+                        author: "maxBloom",
+                        quizType: "Multiple Choice",
+                        quizName: "Geography Quiz",
+                        quizID: "1234567",
+                        timeLimit: "2m 00s",
+                        category: "Geography",
+                        description: "Test your geography",
+                        timeRemaining: 120
+                    })
+                break;
+
         }
             
     }
